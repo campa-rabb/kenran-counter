@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>3D Image Rotation</title>
+<style>
+  body {
+    display: flex; /* フレックスボックスを使用 */
+    flex-direction: column; /* 垂直方向に配置 */
+    justify-content: center; /* 縦方向の中央揃え */
+    align-items: center; /* 横方向の中央揃え */
+    min-height: 100vh; /* 画面全体の高さ */
+    margin: 0; /* 余白の除去 */
+    background-color: #f0f0f0; /* 背景色の設定 */
+    position: relative; /* 相対位置 */
+  }
+
+  #container {
+    perspective: 1000px;
+    width: 200px; /* コンテナの幅を200pxに設定 */
+    height: 300px; /* 高さを維持 */
+    position: relative;
+    overflow: visible;
+  }
+
+  #center-line {
+    position: absolute;
+    height: 350px; /* コンテナよりも長さを50px多くする */
+    width: 2px;
+    background-color: black;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  #rotate-image {
+    width: 100%;
+    height: auto;
+    transition: transform 1s;
+    transform-style: preserve-3d;
+    transform-origin: 0% 50%; /* 回転の軸を左端に設定 */
+    text-align: center;
+  }
+
+  .button-container {
+    margin-top: 20px; /* ボタンを少し下に配置 */
+  }
+
+  .button {
+    padding: 10px 20px;
+    background-color: #FF0000; /* ボタンの背景色を赤に設定 */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+
+  .button:hover {
+    background-color: #cc0000; /* ホバー時の色を少し暗くする */
+  }
+
+  #counter {
+    position: absolute;
+    top: 20px; /* 上から20px */
+    font-size: 48px; /* フォントサイズを大きく設定 */
+    font-weight: bold; /* 太字に設定 */
+    color: #000; /* テキストの色を黒に設定 */
+  }
+</style>
+</head>
+<body>
+<div id="counter">0剣爛業火</div>
+<div id="container">
+  <div id="center-line"></div>
+  <img src="https://poleprincess.jp/img/cr-A_noa.png" alt="3D Rotating Image" id="rotate-image">
+</div>
+
+<div class="button-container">
+  <button class="button" id="count-button">剣爛業火</button>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const img = document.getElementById('rotate-image');
+    const counterDisplay = document.getElementById('counter');
+    const button = document.getElementById('count-button');
+    let angle = 0; // 初期角度
+    let count = 0; // カウンター初期値
+
+    setInterval(() => {
+      angle = (angle + 100) % 360; // 360度でリセット
+      img.style.transform = `rotateY(${angle}deg)`; // Y軸を中心に回転
+    }, 1000);
+
+    button.addEventListener('click', () => {
+      count++;
+      counterDisplay.textContent = `${count}剣爛業火`;
+    });
+  });
+</script>
+</body>
+</html>
